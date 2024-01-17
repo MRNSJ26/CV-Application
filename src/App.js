@@ -82,7 +82,7 @@ function Education() {
   const [academics, setAcademics] = useState(arr);
 
   return (
-    <div className="education">
+    <div className="sec education">
       <h1>Educatiion</h1>
       {academics.map((school) => (
         <School schoolObj={school} />
@@ -93,7 +93,7 @@ function Education() {
 
 function School({ schoolObj }) {
   return (
-    <div className="school">
+    <div className="miniSec school">
       <h3>{schoolObj.name}</h3>
       <p>
         <span>{schoolObj.year}</span>
@@ -112,7 +112,7 @@ function Experiences() {
   const arr = ExperienceArr;
   const [experiences, setExperiences] = useState(arr);
   return (
-    <div className="experience">
+    <div className="sec experience">
       <h1>Professional Experiences</h1>
       {experiences.map((exp) => (
         <SingleExp ExperienceObj={exp} />
@@ -123,7 +123,7 @@ function Experiences() {
 
 function SingleExp({ ExperienceObj }) {
   return (
-    <div className="singleExp">
+    <div className="miniSec singleExp">
       <h3>
         {ExperienceObj.role} - {ExperienceObj.company}
       </h3>

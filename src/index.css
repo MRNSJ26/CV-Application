@@ -31,6 +31,7 @@ code {
 .general li {
   list-style: none;
   flex: 1;
+  margin: 5px;
 }
 
 .general ul {
@@ -39,10 +40,6 @@ code {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-}
-
-.general li {
-  margin: 5px;
 }
 
 .general h1 {
@@ -56,27 +53,13 @@ code {
   padding-right: 0.25rem;
 }
 
-.education {
+.sec {
   color: #000;
   padding: 10px;
 }
 
-.education h1 {
+.sec h1 {
   margin: 0.5rem;
-  background-color: aliceblue;
-  width: 1 rem;
-  color: #000;
-  text-align: center;
-}
-
-.experience {
-  color: #000;
-  padding: 10px;
-}
-
-.experience h1 {
-  margin: 0.5rem;
-
   background-color: aliceblue;
   width: 1 rem;
   color: #000;
@@ -86,4 +69,14 @@ code {
 .break {
   flex-basis: 100%;
   height: 0;
+}
+
+.miniSec {
+  margin: 1rem;
+  margin-top: 1rem;
+}
+
+.miniSec ul {
+  list-style-position: inside;
+  margin-top: 0.5rem;
 }
