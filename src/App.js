@@ -23,15 +23,15 @@ const academicsArr = [
 const ExperienceArr = [
   {
     role: "Photographer",
-    company: "PDI",
+    name: "PDI",
     year: "2021 - 2022",
-    roles: ["BlaBlaBla1", "BlaBlaBla2", "BlaBlaBla3"],
+    description: `A lot of blabla bla`,
   },
   {
     role: "Facilitator",
-    company: "Wolrd Learning",
+    name: "Wolrd Learning",
     year: "2023 - 2024",
-    roles: ["BlaBlaBla1", "BlaBlaBla2", "BlaBlaBla3"],
+    description: `A lot of blabla bla`,
   },
 ];
 
@@ -43,6 +43,7 @@ export default function App() {
   const [email, setEmail] = useState("jijjinoor@gmail.com");
 
   const [academics, setAcademics] = useState(academicsArr);
+  const [experiences, setExperiences] = useState(ExperienceArr);
 
   function handleSubmitGeneral(value) {
     setName(value.name);
@@ -61,11 +62,22 @@ export default function App() {
     setAcademics((arr) => [...arr, newObj]);
   }
 
+  function handleSubmitExperience(value) {
+    const newObj = {
+      role: value.role,
+      name: value.name,
+      year: value.years,
+      description: value.description,
+    };
+    setExperiences((arr) => [...arr, newObj]);
+  }
+
   return (
     <div className="app">
       <FormInput
         onSubmitGeneral={handleSubmitGeneral}
         onSubmitEducation={handleSubmitEducation}
+        onSubmitExperience={handleSubmitExperience}
       />
       <CV
         name={name}
@@ -74,16 +86,18 @@ export default function App() {
         location={location}
         email={email}
         academics={academics}
+        experiences={experiences}
       />
     </div>
   );
 }
 
-function FormInput({ onSubmitGeneral, onSubmitEducation }) {
+function FormInput({ onSubmitGeneral, onSubmitEducation, onSubmitExperience }) {
   return (
     <div className="formInput">
       <InputGeneral onSubmit={onSubmitGeneral} />
       <InputEducation onSubmitEducation={onSubmitEducation} />
+      <InputExperience onSubmitExperience={onSubmitExperience} />
     </div>
   );
 }
@@ -168,10 +182,59 @@ function InputEducation({ onSubmitEducation }) {
         <br />
         <label>Years</label>
         <br />
-        <input type="text" placeholder="2022-2026" name="email" /> <br />
+        <input type="text" placeholder="2022-2026" name="year" /> <br />
         <label>GPA</label>
         <br />
         <input type="text" placeholder="3.4" name="phone" /> <br />
+        <label htmlFor="description">Description</label>
+        <br />
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          cols="18"
+        ></textarea>
+        <button type="submit">Save</button>
+        <br />
+        <br />
+      </form>
+    </div>
+  );
+}
+
+function InputExperience({ onSubmitExperience }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      role: e.target.role.value,
+      name: e.target.name.value,
+      years: e.target.year.value,
+      description: e.target.description.value,
+    };
+
+    onSubmitExperience(formData);
+  };
+
+  return (
+    <div className="form-experience">
+      <form onSubmit={handleSubmit}>
+        <label>
+          <em>EXPERIENCE</em>
+        </label>
+        <br />
+        <br />
+        <label>Role</label>
+        <br />
+        <input type="text" placeholder="Photgrapher" name="role" />
+        <br />
+        <label>Company Name</label>
+        <br />
+        <input type="text" placeholder="PDI" name="name" />
+        <br />
+        <label>Years</label>
+        <br />
+        <input type="text" placeholder="2022-2026" name="year" /> <br />
         <label htmlFor="description">Description</label>
         <br />
         <textarea
@@ -186,7 +249,15 @@ function InputEducation({ onSubmitEducation }) {
   );
 }
 
-function CV({ name, phone, linkedIn, location, email, academics }) {
+function CV({
+  name,
+  phone,
+  linkedIn,
+  location,
+  email,
+  academics,
+  experiences,
+}) {
   return (
     <div className="cvDispaly">
       <GeneralInformation
@@ -197,7 +268,7 @@ function CV({ name, phone, linkedIn, location, email, academics }) {
         email={email}
       />
       <Education academics={academics} />
-      <Experiences />
+      <Experiences experiences={experiences} />
     </div>
   );
 }
@@ -230,8 +301,6 @@ function GeneralInformation({ name, phone, linkedIn, location, email }) {
 }
 
 function Education({ academics }) {
-  const arr = academics;
-
   return (
     <div className="sec education">
       <h1>Educatiion</h1>
@@ -259,9 +328,7 @@ function School({ schoolObj }) {
   );
 }
 
-function Experiences() {
-  const arr = ExperienceArr;
-  const [experiences, setExperiences] = useState(arr);
+function Experiences({ experiences }) {
   return (
     <div className="sec experience">
       <h1>Professional Experiences</h1>
@@ -275,15 +342,15 @@ function Experiences() {
 function SingleExp({ ExperienceObj }) {
   return (
     <div className="miniSec singleExp">
-      <h3>
-        {ExperienceObj.role} - {ExperienceObj.company}
-      </h3>
-      <p>{ExperienceObj.year}</p>
-      <ul>
-        {ExperienceObj.roles.map((rol) => (
-          <li>{rol}</li>
-        ))}
-      </ul>
+      <div>
+        <h3>
+          {ExperienceObj.role} - {ExperienceObj.name}
+        </h3>
+        <p>{ExperienceObj.year}</p>
+      </div>
+      <div>
+        <p>{ExperienceObj.description}</p>
+      </div>
     </div>
   );
 }
