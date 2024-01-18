@@ -6,21 +6,17 @@ const academicsArr = [
     name: "American University of Iraq, Sulimani - AUIS",
     year: "2021 - present",
     gpa: 3.71,
-    learningOutcomes: [
-      "Learn Software Engineering accadimically",
-      "Meet Doctor Hoger Mahomed",
-      "Meet the mystro",
-    ],
+    description: `Learn Software Engineering accadimically
+      Meet Doctor Hoger Mahomed 
+      Meet the mystro`,
   },
   {
     name: "Qaraqosh High Schoo;",
     year: "2017 - 2020",
     gpa: 98.83,
-    learningOutcomes: [
-      "Learn Software Engineering accadimically",
-      "Meet Doctor Hoger Mahomed",
-      "Meet the mystro",
-    ],
+    description: `Learn Software Engineering accadimically\n,
+    Meet Doctor Hoger Mahomed\n,
+    "Meet the mystro\n`,
   },
 ];
 
@@ -46,6 +42,8 @@ export default function App() {
   const [location, setLocation] = useState("Sulimanin, Iraq");
   const [email, setEmail] = useState("jijjinoor@gmail.com");
 
+  const [academics, setAcademics] = useState(academicsArr);
+
   function handleSubmitGeneral(value) {
     setName(value.name);
     setPhone(value.phone);
@@ -53,25 +51,39 @@ export default function App() {
     setEmail(value.email);
     setLocation(value.location);
   }
+  function handleSubmitEducation(value) {
+    const newObj = {
+      name: value.schoolName,
+      year: value.years,
+      gpa: value.gpa,
+      description: value.description,
+    };
+    setAcademics((arr) => [...arr, newObj]);
+  }
 
   return (
     <div className="app">
-      <FormInput onSubmit={handleSubmitGeneral} />
+      <FormInput
+        onSubmitGeneral={handleSubmitGeneral}
+        onSubmitEducation={handleSubmitEducation}
+      />
       <CV
         name={name}
         phone={phone}
         linkedIn={linkedIn}
         location={location}
         email={email}
+        academics={academics}
       />
     </div>
   );
 }
 
-function FormInput({ onSubmit }) {
+function FormInput({ onSubmitGeneral, onSubmitEducation }) {
   return (
     <div className="formInput">
-      <InputGeneral onSubmit={onSubmit} />
+      <InputGeneral onSubmit={onSubmitGeneral} />
+      <InputEducation onSubmitEducation={onSubmitEducation} />
     </div>
   );
 }
@@ -92,27 +104,91 @@ function InputGeneral({ onSubmit }) {
   };
 
   return (
-    <div>
+    <div className="form-general">
       <form onSubmit={handleSubmit}>
+        <label>
+          <em>GENERAL INFORAMTION</em>
+        </label>
+        <br />
+        <br />
         <label>Name</label>
-        <input type="text" placeholder="Noor Safaa" name="name" />
+        <br />
+        <input type="text" placeholder="Noor Safaa" name="name" /> <br />
         <label>Email</label>
-        <input type="text" placeholder="jijjinoor@gmail.com" name="email" />
+        <br />
+        <input
+          type="email"
+          placeholder="jijjinoor@gmail.com"
+          name="email"
+        />{" "}
+        <br />
         <label>Phone Number</label>
-        <input type="text" placeholder="0771 111 1111" name="phone" />
+        <br />
+        <input type="tel" placeholder="0771 111 1111" name="phone" /> <br />
         <label>LinkedIn</label>
-        <input type="text" placeholder="NoorJijji" name="linkedIn" />
+        <br />
+        <input type="text" placeholder="NoorJijji" name="linkedIn" /> <br />
         <label>Location</label>
-        <input type="text" placeholder="Sulimani, IQ" name="location" />
+        <br />
+        <input type="text" placeholder="Sulimani, IQ" name="location" /> <br />
+        <button type="submit">Save</button>
+        <br />
+        <br />
+        <br />
+      </form>
+    </div>
+  );
+}
+
+function InputEducation({ onSubmitEducation }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      schoolName: e.target.name.value,
+      years: e.target.email.value,
+      gpa: e.target.phone.value,
+      description: e.target.description.value,
+    };
+
+    onSubmitEducation(formData);
+  };
+
+  return (
+    <div className="form-education">
+      <form onSubmit={handleSubmit}>
+        <label>
+          <em>EDUCATION</em>
+        </label>
+        <br />
+        <br />
+        <label>School Name</label>
+        <br />
+        <input type="text" placeholder="AUIS" name="name" />
+        <br />
+        <label>Years</label>
+        <br />
+        <input type="text" placeholder="2022-2026" name="email" /> <br />
+        <label>GPA</label>
+        <br />
+        <input type="text" placeholder="3.4" name="phone" /> <br />
+        <label htmlFor="description">Description</label>
+        <br />
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          cols="18"
+        ></textarea>
         <button type="submit">Save</button>
       </form>
     </div>
   );
 }
 
-function CV({ name, phone, linkedIn, location, email }) {
+function CV({ name, phone, linkedIn, location, email, academics }) {
   return (
-    <div className="App">
+    <div className="cvDispaly">
       <GeneralInformation
         name={name}
         phone={phone}
@@ -120,7 +196,7 @@ function CV({ name, phone, linkedIn, location, email }) {
         location={location}
         email={email}
       />
-      <Education />
+      <Education academics={academics} />
       <Experiences />
     </div>
   );
@@ -153,9 +229,8 @@ function GeneralInformation({ name, phone, linkedIn, location, email }) {
   );
 }
 
-function Education() {
-  const arr = academicsArr;
-  const [academics, setAcademics] = useState(arr);
+function Education({ academics }) {
+  const arr = academics;
 
   return (
     <div className="sec education">
@@ -170,16 +245,16 @@ function Education() {
 function School({ schoolObj }) {
   return (
     <div className="miniSec school">
-      <h3>{schoolObj.name}</h3>
-      <p>
-        <span>{schoolObj.year}</span>
-        <span>{schoolObj.gpa}</span>
-      </p>
-      <ul>
-        {schoolObj.learningOutcomes.map((lo) => (
-          <li>{lo}</li>
-        ))}
-      </ul>
+      <div>
+        <h3>{schoolObj.name}</h3>
+        <p>
+          <span>{schoolObj.year}</span>
+          <span>{schoolObj.gpa}</span>
+        </p>
+      </div>
+      <div>
+        <p>{schoolObj.description}</p>
+      </div>
     </div>
   );
 }
