@@ -40,26 +40,102 @@ const ExperienceArr = [
 ];
 
 export default function App() {
+  const [name, setName] = useState("Noor Safaa Wadeea");
+  const [phone, setPhone] = useState("07713900699");
+  const [linkedIn, setLinkedIn] = useState("NoorJijji");
+  const [location, setLocation] = useState("Sulimanin, Iraq");
+  const [email, setEmail] = useState("jijjinoor@gmail.com");
+
+  function handleSubmitGeneral(value) {
+    setName(value.name);
+    setPhone(value.phone);
+    setLinkedIn(value.linkedIn);
+    setEmail(value.email);
+    setLocation(value.location);
+  }
+
+  return (
+    <div className="app">
+      <FormInput onSubmit={handleSubmitGeneral} />
+      <CV
+        name={name}
+        phone={phone}
+        linkedIn={linkedIn}
+        location={location}
+        email={email}
+      />
+    </div>
+  );
+}
+
+function FormInput({ onSubmit }) {
+  return (
+    <div className="formInput">
+      <InputGeneral onSubmit={onSubmit} />
+    </div>
+  );
+}
+
+function InputGeneral({ onSubmit }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      phone: e.target.phone.value,
+      linkedIn: e.target.linkedIn.value,
+      location: e.target.location.value,
+    };
+
+    onSubmit(formData);
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>Name</label>
+        <input type="text" placeholder="Noor Safaa" name="name" />
+        <label>Email</label>
+        <input type="text" placeholder="jijjinoor@gmail.com" name="email" />
+        <label>Phone Number</label>
+        <input type="text" placeholder="0771 111 1111" name="phone" />
+        <label>LinkedIn</label>
+        <input type="text" placeholder="NoorJijji" name="linkedIn" />
+        <label>Location</label>
+        <input type="text" placeholder="Sulimani, IQ" name="location" />
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  );
+}
+
+function CV({ name, phone, linkedIn, location, email }) {
   return (
     <div className="App">
-      <GeneralInformation />
+      <GeneralInformation
+        name={name}
+        phone={phone}
+        linkedIn={linkedIn}
+        location={location}
+        email={email}
+      />
       <Education />
       <Experiences />
     </div>
   );
 }
 
-function GeneralInformation() {
-  const [name, setName] = useState("Noor Safaa Wadeea");
-  const [phone, setPhone] = useState("07713900699");
-  const [linkedIn, setLinkedIn] = useState("NoorJijji");
-  const [location, setLocation] = useState("Sulimanin, Iraq");
-
+function GeneralInformation({ name, phone, linkedIn, location, email }) {
   return (
     <div className="general">
       <h1>{name}</h1>
       <div className="break"></div>
       <ul>
+        <li>
+          <img src="email.png" />
+          <span>{email}</span>
+        </li>
         <li>
           <img src="telephone.png" />
           <span>{phone}</span>

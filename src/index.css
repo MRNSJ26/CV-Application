@@ -21,6 +21,17 @@ code {
     monospace;
 }
 
+.app {
+  display: flex;
+  padding: 2 rem;
+  width: 100vmin;
+}
+
+.formInput {
+  text-align: left;
+  color: #0e374e;
+}
+
 .general {
   background-color: #0e374e;
   color: #fff;
