@@ -91,6 +91,14 @@ code {
   margin-top: 1rem;
 }
 
+.miniSec h3 {
+  margin-right: 4rem;
+}
+
+.miniSec span {
+  margin-right: 1rem;
+}
+
 .miniSec ul {
   list-style-position: inside;
   margin-top: 0.5rem;

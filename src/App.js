@@ -6,17 +6,13 @@ const academicsArr = [
     name: "American University of Iraq, Sulimani - AUIS",
     year: "2021 - present",
     gpa: 3.71,
-    description: `Learn Software Engineering accadimically
-      Meet Doctor Hoger Mahomed 
-      Meet the mystro`,
+    description: `Studying a comprehensive curriculum focusing on software engineering principles, programming languages, and system design, fostering a strong foundation in software development methodologies.`,
   },
   {
     name: "Qaraqosh High Schoo;",
     year: "2017 - 2020",
     gpa: 98.83,
-    description: `Learn Software Engineering accadimically\n,
-    Meet Doctor Hoger Mahomed\n,
-    "Meet the mystro\n`,
+    description: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.`,
   },
 ];
 
@@ -25,13 +21,13 @@ const ExperienceArr = [
     role: "Photographer",
     name: "PDI",
     year: "2021 - 2022",
-    description: `A lot of blabla bla`,
+    description: `Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
   },
   {
     role: "Facilitator",
     name: "Wolrd Learning",
     year: "2023 - 2024",
-    description: `A lot of blabla bla`,
+    description: `Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
   },
 ];
 
