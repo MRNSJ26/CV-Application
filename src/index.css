@@ -12,7 +12,7 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   align-items: center;
-  background-color: gainsboro;
+  background-color: whitesmoke;
   height: 100vh;
 }
 
@@ -105,10 +105,15 @@ code {
   height: fit-content;
 }
 
-.formInput button {
+button {
   background-color: #0e374e;
   color: white;
+  margin-top: 1rem;
   border-radius: 0.25rem;
+  border-width: 0;
+  width: 10rem;
+  height: 2rem;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New";
 }
 
 .formInput input {

@@ -280,19 +280,19 @@ function GeneralInformation({ name, phone, linkedIn, location, email }) {
       <div className="break"></div>
       <ul>
         <li>
-          <img src="email.png" />
+          <img src="email.png" alt="email symbol" />
           <span>{email}</span>
         </li>
         <li>
-          <img src="telephone.png" />
+          <img src="telephone.png" alt="phone symbol" />
           <span>{phone}</span>
         </li>
         <li>
-          <img src="linkedin.png" />
+          <img src="linkedin.png" alt="linked in logo" />
           <span>{linkedIn}</span>
         </li>
         <li>
-          <img src="location.png" />
+          <img src="location.png" alt="location pin symbol" />
           <span>{location}</span>
         </li>
       </ul>
